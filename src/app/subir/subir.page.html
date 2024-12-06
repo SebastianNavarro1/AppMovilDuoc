@@ -1,13 +1,58 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>subir</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">subir</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="upload-content">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="6" size-lg="4" class="upload-container">
+        <h1 class="welcome-title">Detalles del Objeto</h1>
+        <h2 class="subtitle">Rellene los campos</h2>
+        <ion-icon name="image-outline" class="upload-icon"></ion-icon>
+        <form (ngSubmit)="onSubmit()" class="upload-form">
+          <ion-item class="input-item">
+            <ion-label position="floating">Nombre del Objeto</ion-label>
+            <ion-input [(ngModel)]="objectName" name="objectName" required></ion-input>
+          </ion-item>
+
+          <ion-item class="input-item">
+            <ion-label position="floating">Sala Encontrada</ion-label>
+            <ion-input [(ngModel)]="room" name="room" required></ion-input>
+          </ion-item>
+
+          <ion-item class="input-item">
+            <ion-label position="floating">Hora Encontrada</ion-label>
+            <ion-input [(ngModel)]="time" name="time" type="time" required></ion-input>
+          </ion-item>
+
+          <ion-item class="input-item">
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-textarea [(ngModel)]="description" name="description" required></ion-textarea>
+          </ion-item>
+
+          <!-- Botón para elegir entre subir archivo o tomar foto -->
+          <ion-button expand="full" color="primary" (click)="takePicture()">Tomar Foto</ion-button>
+          
+          <!-- Input para seleccionar una imagen desde el dispositivo -->
+          <input type="file" accept="image/*" (change)="onImageChange($event)" style="display:none;" id="file-input">
+          <ion-button expand="full" color="secondary" (click)="triggerFileInput()">Seleccionar Imagen</ion-button>
+
+          <!-- Vista previa de la imagen seleccionada o tomada -->
+          <div *ngIf="previewImage">
+            <h5 class="welcome-title">Vista previa de la imagen:</h5>
+            <img [src]="previewImage" alt="Vista previa de la imagen" style="max-width: 100%; height: auto;">
+          </div>
+
+          <ion-button expand="full" color="success upload-button" type="submit">Subir Objeto</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>objetos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">objetos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="objetos-content">
+  <ion-grid class="objetos-grid">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8" size-lg="6" class="objetos-col">
+        <h1 class="objeto-title ion-text-center">Objetos Perdidos</h1>
+        <p class="objetos-description">
+          Aquí podrás ver los objetos que han sido reportados como perdidos. Si encuentras alguno de estos 
+          objetos o necesitas ayuda para recuperar uno, contáctanos o repórtalo aquí.
+        </p>
+        <ion-list class="objetos-list">
+        <ion-item *ngFor="let objeto of objetos" class="objeto-item">
+          <ion-card class="objeto-card">
+            <img [src]="objeto.foto" alt="Imagen del objeto perdido" class="objeto-img" />
+            <ion-card-header>
+              <ion-card-title class="objeto-title">{{ objeto.nombre_objeto }}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-item>
+      </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
 </ion-content>

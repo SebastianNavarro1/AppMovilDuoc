@@ -1,10 +1,43 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button expand="block" (click)="takePhoto()">Tomar Foto</ion-button>
-  <img *ngIf="previewImage" [src]="previewImage" alt="Vista previa" />
+<ion-content class="home-content">
+  <ion-grid class="home-grid">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8" size-lg="6">
+        <h1 class="welcome-title ion-text-center">¡Bienvenido, {{ username }}!</h1>
+      </ion-col>
+    </ion-row>
+
+    <h3 class="home-description">
+      La página tiene como objetivo principal facilitar la cooperación entre los estudiantes del DuocUC. Está 
+      diseñada para ayudarlos en situaciones en las que puedan necesitar apoyo, especialmente en casos como 
+      la pérdida de sus pertenencias.
+    </h3>
+    <h3 class="home-description">
+      El propósito es generar una sede donde los estudiantes esten seguros que al momento de perder
+      algun objeto este sera dejado en el punto estudiantil para poder reuperarlo, generando asi una sana convivencia
+      entre duocanos.
+    </h3>
+  </ion-grid>
+
+  <ion-card class="map-card">
+    <ion-card-header>
+      <ion-card-title class="welcome-title ion-text-center">Sede DuocUC</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="map-container">
+        <div id="map"></div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
