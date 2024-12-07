@@ -21,7 +21,9 @@
         <ion-list class="objetos-list">
         <ion-item *ngFor="let objeto of objetos" class="objeto-item">
           <ion-card class="objeto-card">
-            <img [src]="objeto.foto" alt="Imagen del objeto perdido" class="objeto-img" />
+            <ion-card class="objeto-card">
+              <img [src]="objeto.foto" alt="Imagen del objeto perdido" class="objeto-img" />
+            </ion-card>
             <ion-card-header>
               <ion-card-title class="objeto-title">{{ objeto.nombre_objeto }}</ion-card-title>
             </ion-card-header>

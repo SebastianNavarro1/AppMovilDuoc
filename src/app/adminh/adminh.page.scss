@@ -1,0 +1,50 @@
+.adminh-content {
+    --background: #1b1b1b;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  ion-header, ion-toolbar {
+    --background: #1b1b1b;
+    color: #ffffff;
+  }
+  
+  .adminh-grid {
+    padding: 20px;
+  }
+  
+  .welcome-title {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-top: 20px;
+  }
+  
+  .adminh-description {
+    font-size: 1.2rem;
+    color: #a0a0a0;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .map-card {
+    background-color: #383838;
+    color: #ffffff;
+    width: 70%;
+    margin: 20px auto;
+    border-radius: 12px;
+  }
+  
+  #map-container {
+    height: 40vh;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  #map {
+    height: 100%;
+    width: 100%;
+  }
+  

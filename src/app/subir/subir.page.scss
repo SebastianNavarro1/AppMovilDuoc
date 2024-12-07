@@ -1,0 +1,121 @@
+.upload-content {
+    --background: #1b1b1b;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  ion-header, ion-toolbar {
+    --background: #1b1b1b;
+    color: #ffffff;
+  }
+  
+  .upload-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .welcome-title {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-top: 20px;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    color: #a0a0a0;
+    margin-bottom: 20px;
+  }
+  
+  .upload-icon {
+    font-size: 5rem;
+    color: #3880ff;
+    margin-bottom: 20px;
+    animation: pulse 1.5s infinite;
+  }
+  
+  .upload-form {
+    margin-bottom: 20px;
+  }
+  
+  .input-item {
+    --background: #575757;
+    margin-bottom: 15px;
+    border-radius: 27px;
+  }
+  
+  .input-item ion-input,
+  .input-item ion-textarea,
+  .input-item input {
+    color: #ffffff;
+    border-radius: 20px;
+  }
+  
+  .input-item ion-label {
+    color: #ffffff;
+  }
+  
+  .upload-button {
+    margin-top: 10px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Oculta completamente el input por defecto */
+  .input-item input[type="file"] {
+    opacity: 0; /* Hace el input completamente invisible */
+    position: absolute; /* Lo saca del flujo normal del documento */
+    width: 100%; /* Ocupa todo el espacio disponible */
+    height: 100%; /* Asegura que cubra el área del contenedor */
+    cursor: pointer; /* Cambia el cursor para mostrar que es clickeable */
+  }
+  
+  /* Estilo personalizado para el botón de archivo */
+  .custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #3880ff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-file-label:hover {
+    background-color: #4c8dff;
+  }
+  
+  .custom-file-label:active {
+    background-color: #2a6fd8;
+  }
+  

@@ -1,2 +1,7 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+ion-tab-bar {
+    --ion-tab-bar-background: #383838; /* Cambia el color de fondo */
+    --ion-color-step-500: #ffffff; /* Cambia el color del texto */
+}
