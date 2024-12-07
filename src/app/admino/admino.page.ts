@@ -21,8 +21,7 @@ export class AdminoPage implements OnInit {
   async cargarObjetos() {
     const { data, error } = await supabase
       .from('objetos_perdidos')
-      .select('id_objeto, nombre_objeto,sala_encontrada,hora_encontrada, descripcion, foto, activo')
-      .eq('activo', true);
+      .select('id_objeto, nombre_objeto,sala_encontrada,hora_encontrada, descripcion, foto, activo');
 
     if (error) {
       console.error('Error al cargar objetos:', error);
@@ -97,8 +96,7 @@ export class AdminoPage implements OnInit {
               console.error('Error al buscar el usuario con ese RUT:', usuarioError);
               return false;
             }
-  
-            // Actualizar en la tabla `historial`
+
             const { error: historialError } = await supabase
               .from('historial')
               .update({
@@ -112,7 +110,7 @@ export class AdminoPage implements OnInit {
               return false;
             }
   
-            // Actualizar el estado del objeto
+
             const { error: objetoError } = await supabase
               .from('objetos_perdidos')
               .update({ activo: false })
@@ -123,7 +121,6 @@ export class AdminoPage implements OnInit {
               return false;
             }
   
-            // Actualizar listas locales
             this.objetos = this.objetos.filter((obj) => obj.id_objeto !== id_objeto);
             await this.cargarHistorial();
   
