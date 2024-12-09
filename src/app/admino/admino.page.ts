@@ -21,8 +21,8 @@ export class AdminoPage implements OnInit {
   async cargarObjetos() {
     const { data, error } = await supabase
       .from('objetos_perdidos')
-      .select('id_objeto, nombre_objeto,sala_encontrada,hora_encontrada, descripcion, foto, activo');
-
+      .select('id_objeto, nombre_objeto,sala_encontrada,hora_encontrada, descripcion, foto, activo')
+      .eq('activo',true);
     if (error) {
       console.error('Error al cargar objetos:', error);
     } else {
