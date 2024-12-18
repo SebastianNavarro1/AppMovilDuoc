@@ -88,16 +88,16 @@
     }
   }
   
-  /* Oculta completamente el input por defecto */
+
   .input-item input[type="file"] {
-    opacity: 0; /* Hace el input completamente invisible */
-    position: absolute; /* Lo saca del flujo normal del documento */
-    width: 100%; /* Ocupa todo el espacio disponible */
-    height: 100%; /* Asegura que cubra el área del contenedor */
-    cursor: pointer; /* Cambia el cursor para mostrar que es clickeable */
+    opacity: 0; 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    cursor: pointer; 
   }
   
-  /* Estilo personalizado para el botón de archivo */
+  
   .custom-file-label {
     display: inline-block;
     padding: 10px 20px;

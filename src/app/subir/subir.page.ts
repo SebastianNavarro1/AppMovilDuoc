@@ -64,7 +64,7 @@ export class SubirPage {
       const now = new Date();
       const formattedDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
 
-      // Insertar en la tabla objetos_perdidos
+      
       const { data: objetoData, error: insertError } = await supabase
         .from('objetos_perdidos')
         .insert([{
@@ -76,7 +76,7 @@ export class SubirPage {
           rut_usuario: userRut,
           activo: true,
         }])
-        .select('id_objeto') // Seleccionar el id del objeto recién insertado
+        .select('id_objeto') 
         .single();
 
       if (insertError) {
@@ -85,8 +85,8 @@ export class SubirPage {
         return;
       }
 
-      // Insertar en la tabla Historial con hora_entrega
-      const horaEntrega = formattedDateTime; // Usar la misma fecha/hora formateada
+      
+      const horaEntrega = formattedDateTime; 
 
       const { error: historialError } = await supabase
         .from('historial')

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { supabase } from 'supabase.service'; // Asegúrate de importar tu servicio de Supabase
+import { supabase } from 'supabase.service'; 
 
 @Component({
   selector: 'app-objetos',
@@ -12,12 +12,12 @@ export class ObjetosPage implements OnInit {
 
   constructor(private navCtrl: NavController) {}
 
-  // Función para cerrar sesión
+  
   logout() {
-    // Eliminar el usuario del localStorage
+    
     localStorage.removeItem('loggedInUser');
 
-    // Redirigir a la página de login
+    
     this.navCtrl.navigateRoot('/login');
   }
   async ngOnInit() {
@@ -33,7 +33,7 @@ export class ObjetosPage implements OnInit {
     if (error) {
       console.error('Error al cargar objetos:', error);
     } else {
-      this.objetos = data; // Asigna los datos a la propiedad objetos
+      this.objetos = data; 
     }
   }
     

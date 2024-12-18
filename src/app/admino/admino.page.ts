@@ -52,7 +52,7 @@ export class AdminoPage implements OnInit {
   }
 
   async entregarObjeto(objeto: any) {
-    const id_objeto = objeto.id_objeto; // Extraer el ID numérico del objeto
+    const id_objeto = objeto.id_objeto; 
     console.log('ID del objeto recibido:', id_objeto);
   
     if (!id_objeto || typeof id_objeto !== 'number') {
@@ -85,7 +85,7 @@ export class AdminoPage implements OnInit {
               return false;
             }
   
-            // Validar si el RUT pertenece a un usuario
+           
             const { data: usuario, error: usuarioError } = await supabase
               .from('usuarios')
               .select('nombre_completo, carrera')

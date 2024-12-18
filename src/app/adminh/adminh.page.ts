@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { supabase } from 'supabase.service';  // Importar el servicio de Supabase
+import { supabase } from 'supabase.service';  
 
 @Component({
   selector: 'app-adminh',
@@ -11,7 +11,7 @@ import { supabase } from 'supabase.service';  // Importar el servicio de Supabas
 export class AdminhPage implements OnInit {
   username: string = '';
   map: any;
-  adminObjects: any[] = [];  // Lista de objetos perdidos para el administrador
+  adminObjects: any[] = []; 
 
   constructor(private navCtrl: NavController, private route: ActivatedRoute) {}
 
@@ -19,14 +19,14 @@ export class AdminhPage implements OnInit {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
   
     if (loggedInUser && loggedInUser.nombre_completo) {
-      this.username = loggedInUser.nombre_completo;  // Usar el nombre del usuario almacenado
+      this.username = loggedInUser.nombre_completo; 
     }
 
-    this.loadAdminObjects();  // Cargar objetos perdidos
+    this.loadAdminObjects();
   }
 
 
-  // Cargar objetos perdidos para el administrador
+  
   async loadAdminObjects() {
     const { data, error } = await supabase
       .from('objetos_perdidos')

@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Asegúrate de que el contenido ocupe toda la altura */
+    height: 100%; 
   }
   
   .login-container {
@@ -38,14 +38,14 @@
   }
   
   .input-item {
-    --background: #575757; /* Color de fondo para los inputs */
+    --background: #575757; 
     margin-bottom: 15px;
-    border-radius: 27px; /* Bordes redondeados */
+    border-radius: 27px; 
   }
   
   .input-item ion-input {
-    color: #ffffff; /* Color del texto */
-    border-radius: 20px; /* Asegúrate que los inputs también tengan bordes redondeados */
+    color: #ffffff; 
+    border-radius: 20px; 
   }
   
   .input-item ion-label {

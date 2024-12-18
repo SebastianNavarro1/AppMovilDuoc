@@ -15,7 +15,7 @@ export class RecuperarPage {
   constructor(private navCtrl: NavController, private alertController: AlertController) {}
 
   async resetPassword() {
-    // Actualizar la contraseña en la base de datos
+   
     const { data, error } = await supabase
       .from('usuarios')
       .update({ password: this.nuevaContrasena })
@@ -35,7 +35,7 @@ export class RecuperarPage {
         buttons: ['OK']
       });
       await alert.present();
-      this.navCtrl.navigateBack('/login'); // Regresar a la página de login
+      this.navCtrl.navigateBack('/login'); 
     }
   }
   goToLogin() {

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./error.page.scss'],
 })
 export class ErrorPage implements OnInit {
-  audio!: HTMLAudioElement;  // Usamos el operador '!' para indicar que será inicializada más tarde
+  audio!: HTMLAudioElement; 
 
   constructor(private router: Router) { }
 
@@ -22,19 +22,19 @@ export class ErrorPage implements OnInit {
   }
 
   playAudio() {
-    this.audio = new Audio('assets/musica/Megalovania.mp3'); // Crea el objeto Audio
-    this.audio.play();  // Inicia la reproducción
+    this.audio = new Audio('assets/musica/Megalovania.mp3'); 
+    this.audio.play();  
   }
 
   stopAudio() {
     if (this.audio) {
-      this.audio.pause();  // Pausa la reproducción
-      this.audio.currentTime = 0;  // Reinicia el audio al principio
+      this.audio.pause(); 
+      this.audio.currentTime = 0; 
     }
   }
 
   ionViewWillLeave() {
-    // Detener el audio cuando la página se destruya (cuando navegas fuera de la página)
+    
     this.stopAudio();
   }
 }

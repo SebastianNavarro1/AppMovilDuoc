@@ -14,10 +14,10 @@ export class Ingresado implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    const isLoggedIn = !!localStorage.getItem('isLoggedIn'); // Lógica para verificar si el usuario está logueado
+    const isLoggedIn = !!localStorage.getItem('isLoggedIn'); 
 
     if (isLoggedIn) {
-      return true; // Permite el acceso
+      return true; 
     } else {
       return this.router.createUrlTree(['/login']);
     }

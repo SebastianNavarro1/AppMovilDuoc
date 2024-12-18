@@ -13,23 +13,23 @@ export class NoIngresado implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    const isLoggedIn = !!localStorage.getItem('isLoggedIn'); // Verifica si el usuario está logueado
+    const isLoggedIn = !!localStorage.getItem('isLoggedIn');
 
     if (isLoggedIn) {
       const user = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-      const idTipoUsuario = user?.id_tipo_usuario;  // Obtén el id_tipo_usuario del localStorage
+      const idTipoUsuario = user?.id_tipo_usuario; 
 
-      // Si el tipo de usuario es Admin (id_tipo_usuario 1)
+      
       if (idTipoUsuario === 1) {
-        return this.router.createUrlTree(['/admintabs']); // Redirige a la página de Admin
+        return this.router.createUrlTree(['/admintabs']); 
       } 
-      // Si el tipo de usuario es Usuario (id_tipo_usuario 2)
+      
       else if (idTipoUsuario === 2) {
-        return this.router.createUrlTree(['/tabs']); // Redirige a la página de Usuario
+        return this.router.createUrlTree(['/tabs']); 
       }
     }
 
-    // Si el usuario no está logueado, permite el acceso a la página de login
+    
     return true;
   }
 }

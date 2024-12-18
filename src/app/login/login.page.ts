@@ -21,24 +21,24 @@ export class LoginPage {
 
     const { data: users, error } = await supabase
       .from('usuarios')
-      .select('*, tipo_usuario(id_tipo_usuario)') // Seleccionar el campo id_tipo_usuario de la relación Tipo_usuario
+      .select('*, tipo_usuario(id_tipo_usuario)') 
       .eq('correo', this.Usuario.correo)
       .eq('contraseña', hashedPassword);  
 
     if (users && users.length > 0) {
       const user = users[0];
-      console.log('Usuario encontrado: ', user); // Verifica qué campos están llegando
+      console.log('Usuario encontrado: ', user);
 
-      // Guardar los datos del usuario, incluyendo el id_tipo_usuario
+      
       localStorage.setItem('loggedInUser', JSON.stringify({
         rut: user.rut,
         nombre_completo: user.nombre_completo,
         correo: user.correo,
-        id_tipo_usuario: user.tipo_usuario.id_tipo_usuario // Acceder correctamente al id_tipo_usuario
+        id_tipo_usuario: user.tipo_usuario.id_tipo_usuario 
       }));
       localStorage.setItem('isLoggedIn', 'true');
 
-      // Redirigir según el tipo de usuario
+      
       if (user.tipo_usuario.id_tipo_usuario === 1) {
         this.navCtrl.navigateForward('/admintabs');
       } else {

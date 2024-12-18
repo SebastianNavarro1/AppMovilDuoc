@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
   
     if (loggedInUser && loggedInUser.nombre_completo) {
-      this.username = loggedInUser.nombre_completo; // Usar el nombre del usuario almacenado
+      this.username = loggedInUser.nombre_completo; 
     } else {
       this.route.queryParams.subscribe(params => {
         if (params['username']) {
