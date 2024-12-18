@@ -1,12 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Admin - Historial</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()">
-        <ion-icon name="log-out-outline"></ion-icon>
-        Cerrar Sesión
-      </ion-button>
-    </ion-buttons>
+    <ion-title class="historial-title">Historial de Objetos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +8,6 @@
   <ion-grid class="historial-grid">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="8" size-lg="6" class="historial-col">
-        <h1 class="historial-title ion-text-center">Historial de Objetos</h1>
         <p class="historial-description">
           Este es el registro de los objetos perdidos que han sido entregados. Aquí encontrarás información
           detallada de cada objeto, junto con el usuario que lo reclamó.
@@ -22,15 +15,22 @@
         <ion-list class="historial-list">
           <ion-item *ngFor="let item of historial" class="historial-item">
             <ion-card class="historial-card">
+
+              <img *ngIf="item.foto" [src]="item.foto" alt="Foto del objeto" class="historial-foto"/>
+
               <ion-card-header>
-                <ion-card-title class="historial-item-title">ID Historial: {{ item.id_historial }}</ion-card-title>
+                <ion-card-title class="historial-item-title">
+                  ID Historial: {{ item.id_historial }}
+                </ion-card-title>
               </ion-card-header>
+              
               <ion-card-content>
-                <p>ID Objeto: {{ item.id_objeto }}</p>
-                <p>RUT Usuario: {{ item.rut_usuario }}</p>
-                <p>RUT Entregado a: {{ item.entregado_a }}</p>
-                <p>Nombre: {{ item.usuario?.nombre_completo }}</p>
-                <p>Carrera: {{ item.usuario?.carrera_descripcion }}</p>
+                <p><strong>ID Objeto:</strong> {{ item.id_objeto }}</p>
+                <p><strong>RUT Usuario:</strong> {{ item.rut_usuario }}</p>
+                <p><strong>RUT Entregado a:</strong> {{ item.entregado_a }}</p>
+                <p><strong>Nombre:</strong> {{ item.usuario?.nombre_completo }}</p>
+                <p><strong>Carrera:</strong> {{ item.usuario?.carrera_descripcion }}</p>
+                <p><strong>Hora de entrega:</strong> {{ item.hora_entrega }}</p>
               </ion-card-content>
             </ion-card>
           </ion-item>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { supabase } from 'supabase.service'; // Asegúrate de importar tu servicio de Supabase
-import { NavController } from '@ionic/angular';
+import { supabase } from 'supabase.service';
 
 @Component({
   selector: 'app-historial',
@@ -9,9 +7,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./historial.page.scss'],
 })
 export class HistorialPage implements OnInit {
-  historial: any[] = []; // Propiedad para almacenar los datos del historial
+  historial: any[] = [];
 
-  constructor(private navCtrl: NavController, private route: ActivatedRoute) {}
+  constructor() {}
 
   ngOnInit() {
     this.loadHistorial();
@@ -19,72 +17,90 @@ export class HistorialPage implements OnInit {
 
   async loadHistorial() {
     try {
-      // Primero obtenemos todos los registros del historial
+      
       const { data, error } = await supabase
         .from('historial')
         .select(
-          'id_historial, id_objeto, rut_usuario, entregado_a, descripcion, sala_encontrada'
-        );
+          'id_historial, id_objeto, rut_usuario, entregado_a, hora_entrega, activo'
+        )
+        .eq('activo', false); 
 
       if (error) {
         console.error('Error al cargar el historial:', error);
         return;
       }
 
-      // Ahora, obtenemos los datos de los usuarios correspondientes al "entregado_a"
-      const historialConUsuarios = await Promise.all(
+      const historialCompleto = await Promise.all(
         data.map(async (item) => {
-          // Consulta para obtener los datos del usuario al que se entregó el objeto (usamos "entregado_a" que es el "rut" del usuario)
+          
+          const formattedHoraEntrega = this.formatFecha(item.hora_entrega);
+
           const { data: usuarioData, error: usuarioError } = await supabase
             .from('usuarios')
             .select('nombre_completo, carrera')
             .eq('rut', item.entregado_a)
-            .single(); 
+            .single();
 
           if (usuarioError) {
             console.error('Error al obtener datos del usuario:', usuarioError);
-            return item; 
+            return item;
           }
 
           const { data: carreraData, error: carreraError } = await supabase
             .from('carrera')
-            .select('descripcion') 
-            .eq('id_carrera', usuarioData.carrera) 
+            .select('descripcion')
+            .eq('id_carrera', usuarioData.carrera)
             .single();
 
           if (carreraError) {
-            console.error(
-              'Error al obtener la descripción de la carrera:',
-              carreraError
-            );
-            return item; 
+            console.error('Error al obtener la descripción de la carrera:', carreraError);
+            return item;
           }
 
-        
+          const { data: objetoData, error: objetoError } = await supabase
+            .from('objetos_perdidos')
+            .select('foto')
+            .eq('id_objeto', item.id_objeto)
+            .single();
+
+          if (objetoError) {
+            console.error('Error al obtener la foto del objeto:', objetoError);
+          }
+
           return {
             ...item,
             usuario: {
               ...usuarioData,
-              carrera_descripcion: carreraData.descripcion, 
+              carrera_descripcion: carreraData.descripcion,
             },
+            foto: objetoData?.foto,
+            hora_entrega: formattedHoraEntrega, 
           };
         })
       );
-      
-      this.historial = historialConUsuarios;
+
+     
+      this.historial = historialCompleto.sort((a, b) => {
+        const dateA = new Date(a.hora_entrega).getTime();
+        const dateB = new Date(b.hora_entrega).getTime();
+        return dateA - dateB; 
+      });
     } catch (error) {
-      console.error(
-        'Error al cargar el historial con datos de usuario y carrera:',
-        error
-      );
+      console.error('Error al cargar el historial completo:', error);
     }
   }
 
   
-
-  logout() {
-    localStorage.removeItem('loggedInUser');
-    localStorage.removeItem('isLoggedIn');
-    this.navCtrl.navigateRoot('/login');
+  formatFecha(fecha: string): string {
+    const date = new Date(fecha);
+    return date.toLocaleString('es-CL', {
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: 'numeric', 
+      minute: 'numeric', 
+      second: 'numeric', 
+    });
   }
 }

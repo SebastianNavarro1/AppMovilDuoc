@@ -62,7 +62,7 @@ export class SubirPage {
       }
 
       const now = new Date();
-      const formattedTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${this.time}:00`;
+      const formattedDateTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
 
       // Insertar en la tabla objetos_perdidos
       const { data: objetoData, error: insertError } = await supabase
@@ -70,7 +70,7 @@ export class SubirPage {
         .insert([{
           nombre_objeto: this.objectName,
           sala_encontrada: this.room,
-          hora_encontrada: formattedTime,
+          hora_encontrada: formattedDateTime,
           descripcion: this.description,
           foto: publicUrl,
           rut_usuario: userRut,
@@ -85,7 +85,9 @@ export class SubirPage {
         return;
       }
 
-      // Insertar en la tabla Historial
+      // Insertar en la tabla Historial con hora_entrega
+      const horaEntrega = formattedDateTime; // Usar la misma fecha/hora formateada
+
       const { error: historialError } = await supabase
         .from('historial')
         .insert([{
@@ -94,6 +96,7 @@ export class SubirPage {
           sala_encontrada: this.room,
           descripcion: this.description,
           activo: true,
+          hora_entrega: horaEntrega, 
         }]);
 
       if (historialError) {
@@ -102,7 +105,7 @@ export class SubirPage {
         return;
       }
 
-      alert('Objeto subido correctamente y agregado al historial');
+      alert('Objeto subido correctamente y agregado al historial con hora de entrega');
       this.navCtrl.navigateBack('/');
     } catch (error) {
       console.error('Error inesperado:', error);
@@ -112,7 +115,6 @@ export class SubirPage {
 
   async takePicture() {
     try {
-      console.log('Intentando tomar una foto...');
       const previewImage = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
@@ -122,7 +124,6 @@ export class SubirPage {
 
       if (previewImage.webPath) {
         this.previewImage = previewImage.webPath;
-        console.log('Foto tomada con éxito:', this.previewImage);
       } else {
         console.error('No se pudo obtener la ruta de la imagen');
         this.previewImage = null;
